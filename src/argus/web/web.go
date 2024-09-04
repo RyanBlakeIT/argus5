@@ -111,6 +111,11 @@ func (s *Server) httpServer(port int) *http.Server {
 		Handler: Mux,
 		TLSConfig: &tls.Config{
 			MinVersion: tls.VersionTLS12,
+			PreferServerCipherSuites: true,
+			CipherSuites: []uint16{
+				tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+				tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+			},
 		},
 	}
 	s.services = append(s.services, www)
